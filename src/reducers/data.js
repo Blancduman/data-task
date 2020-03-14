@@ -1,11 +1,16 @@
-import { FETCH_DATA } from "../actions/types";
+import { FETCH_DATA, SORT_DATA } from "../actions/types";
 
-export default (state = [], action) => {
+const initialState = {
+  data: [],
+  sorted: []
+};
+
+export default (state = initialState, action) => {
   switch (action.type) {
     case FETCH_DATA:
-      return [...state, ...action.payload];
-    case "minus1":
-      return [...action.payload];
+      return { data: action.payload, sorted: action.payload };
+    case SORT_DATA:
+      return { ...state, sorted: action.payload };
     default:
       return state;
   }

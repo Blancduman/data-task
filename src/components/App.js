@@ -10,7 +10,7 @@ import "./App.css";
 // const columnWidths = [50, 200, 270, 150, 120, 100, 100, 100];
 
 function App(props) {
-  const data = useSelector(state => state.data);
+  const { data } = useSelector(state => state.data);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -23,13 +23,13 @@ function App(props) {
 
   if (data.length)
     return (
-      <div className="App">
+      <div className="App" style={{ marginLeft: 25 }}>
         <TableHead />
         <FixedSizeList
           height={800}
           itemCount={data.length}
           itemSize={45}
-          width={1398}
+          width={1538}
           style={{ overflowX: "hidden", borderBottom: "1px solid #ddd" }}
         >
           {Row}

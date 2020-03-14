@@ -6,25 +6,30 @@ import "./Row.scss";
 const Row = ({ index, style }) => {
   const {
     rank,
-    name,
-    lastName,
+    fullName,
     email,
     LocationName,
     phone,
     date,
+    role,
     payment
-  } = useSelector(state => state.data[index]);
+  } = useSelector(state => state.data.sorted[index]);
   return (
     <div style={{ ...style }} className="tableRow">
       <span className="tableRow--rank display-cell-flex text-verflow-ellipsis border-right border-left">
         {rank}
       </span>
-      <span className="tableRow--fullname display-cell-flex text-verflow-ellipsis border-right tableRow--item-left">{`${name} ${lastName}`}</span>
+      <span className="tableRow--fullname display-cell-flex text-verflow-ellipsis border-right tableRow--item-left">
+        {fullName}
+      </span>
       <span className="tableRow--email display-cell-flex text-verflow-ellipsis border-right tableRow--item-left">
         {email}
       </span>
       <span className="tableRow--LocationName display-cell-flex text-verflow-ellipsis border-right tableRow--item-left">
         {LocationName}
+      </span>
+      <span className="tableRow--phone display-cell-flex text-verflow-ellipsis border-right">
+        {role}
       </span>
       <span className="tableRow--phone display-cell-flex text-verflow-ellipsis border-right">
         {phone}
