@@ -34,33 +34,25 @@ export const loadData = () => async dispatch => {
   dispatch({ type: FETCH_DATA, payload: data });
 };
 
-export const toggleSort = (key, direction) => async (dispatch, getState) => {
-  dispatch({
-    type: TOGGLE_SORT,
-    payload: {
-      key,
-      direction
-    }
-  });
-
+export const toggleSort = key => async (dispatch, getState) => {
+  dispatch({ type: TOGGLE_SORT, payload: { key } });
   const headers = getState().tableHeaders;
+
   const keys = [];
   const values = [];
 
-  for (let header in headers) {
-    if (headers[header] !== "") {
-      if (header === "payment") {
-        keys.push(function(item) {
-          return _.chain(item)
-            .get(header)
-            .get("amount")
-            .value();
-        });
-      } else {
-        keys.push(header);
-      }
-      values.push(headers[header]);
+  for (let header of headers) {
+    if (header.key === "payment") {
+      keys.push(function(item) {
+        return _.chain(item)
+          .get(header.key)
+          .get("amount")
+          .value();
+      });
+    } else {
+      keys.push(header.key);
     }
+    values.push(header.direction);
   }
   const unsortedData = getState().data.data;
   console.log([...keys], [...values]);
