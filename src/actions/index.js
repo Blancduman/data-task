@@ -63,7 +63,7 @@ export const toggleSort = (key, direction) => async (dispatch, getState) => {
     }
   }
   const unsortedData = getState().data.data;
-  const sortedData = _.sortBy(unsortedData, [...keys], [...values]);
-  console.log(keys, values);
+  console.log([...keys], [...values]);
+  const sortedData = _.orderBy(unsortedData, [...keys], [...values]);
   dispatch({ type: SORT_DATA, payload: sortedData });
 };
