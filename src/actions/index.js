@@ -1,6 +1,6 @@
 import { FETCH_DATA } from "./types";
 import faker from "faker";
-faker.seed(781);
+faker.seed(783);
 
 const makeFake = index => {
   return {
@@ -15,12 +15,19 @@ const makeFake = index => {
     description: faker.lorem.text(),
     idNumber: faker.random.number(),
     date: faker.date.recent(),
-    payment: faker.commerce.price(),
-    currency: faker.finance.currencySymbol()
+    payment: {
+      amount: faker.commerce.price(),
+      currency: faker.finance.currencySymbol()
+    }
   };
 };
 
 export const loadData = () => async dispatch => {
   const data = [...new Array(100)].map((_, index) => makeFake(index));
   dispatch({ type: FETCH_DATA, payload: data });
+};
+let sto = 100;
+export const minus1 = () => async (dispatch, getState) => {
+  const data = [...new Array(sto--)].map((_, index) => makeFake(index));
+  dispatch({ type: "minus1", payload: data });
 };

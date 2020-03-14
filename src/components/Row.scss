@@ -1,0 +1,62 @@
+@import "styles/constants";
+
+.tableRow {
+  font-size: 1.2rem;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+}
+
+.tableRow--item-left {
+  padding-left: 10px;
+}
+
+.tableRow--item-right {
+  padding-right: 10px;
+}
+
+.display-cell-flex {
+  display: flex;
+  align-items: center;
+}
+
+.border-left {
+  border-left: 1px solid #ddd;
+}
+
+.text-verflow-ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.tableRow--rank {
+  width: $rank-width;
+  justify-content: center;
+}
+.tableRow--fullname {
+  width: $fullname-width;
+  justify-content: flex-start;
+}
+.tableRow--email {
+  width: $email-width;
+  justify-content: flex-start;
+}
+.tableRow--LocationName {
+  width: $LocationName-width;
+  justify-content: flex-start;
+}
+.tableRow--phone {
+  width: $phone-width;
+  justify-content: center;
+}
+.tableRow--date {
+  width: $date-width;
+  justify-content: center;
+}
+.tableRow--payment {
+  width: $payment-width;
+  justify-content: flex-end;
+}
+.tableRow--currency {
+  width: $currency-width;
+  justify-content: center;
+}
