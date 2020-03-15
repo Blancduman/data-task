@@ -39,31 +39,41 @@ const TableHead = () => {
   return (
     <div className="tableHead">
       <span
-        className={`tableHead--rank display-cell-flex border-right sort-by${headers["rank"]}`}
+        className={`tableHead--rank border-left display-cell-flex border-right sort-by${
+          headers["rank"] ? headers["rank"] + " sorted" : ""
+        }`}
         onClick={() => toggleClick("rank")}
       >
         #
       </span>
       <span
-        className={`tableHead--fullname display-cell-flex border-right sort-by${headers["fullName"]}`}
+        className={`tableHead--fullname display-cell-flex border-right sort-by${
+          headers["fullName"] ? headers["fullName"] + " sorted" : ""
+        }`}
         onClick={() => toggleClick("fullName")}
       >
         Fullname
       </span>
       <span
-        className={`tableHead--email display-cell-flex border-right sort-by${headers["email"]}`}
+        className={`tableHead--email display-cell-flex border-right sort-by${
+          headers["email"] ? headers["email"] + " sorted" : ""
+        }`}
         onClick={() => toggleClick("email")}
       >
         Email
       </span>
       <span
-        className={`tableHead--LocationName display-cell-flex border-right  sort-by${headers["LocationName"]}`}
+        className={`tableHead--LocationName display-cell-flex border-right  sort-by${
+          headers["LocationName"] ? headers["LocationName"] + " sorted" : ""
+        }`}
         onClick={() => toggleClick("LocationName")}
       >
         Location
       </span>
       <span
-        className={`tableHead--role display-cell-flex border-right sort-by${headers["role"]}`}
+        className={`tableHead--role display-cell-flex border-right sort-by${
+          headers["role"] ? headers["role"] + " sorted" : ""
+        }`}
         onClick={() => toggleClick("role")}
       >
         Role
@@ -72,13 +82,17 @@ const TableHead = () => {
         Phone
       </span>
       <span
-        className={`tableHead--date display-cell-flex border-right sort-by${headers["date"]}`}
+        className={`tableHead--date display-cell-flex border-right sort-by${
+          headers["date"] ? headers["date"] + " sorted" : ""
+        }`}
         onClick={() => toggleClick("date")}
       >
         Date
       </span>
       <span
-        className={`tableHead--payment display-cell-flex border-right sort-by${headers["payment"]}`}
+        className={`tableHead--payment display-cell-flex border-right sort-by${
+          headers["payment"] ? headers["payment"] + " sorted" : ""
+        }`}
         onClick={() => toggleClick("payment")}
       >
         Payment

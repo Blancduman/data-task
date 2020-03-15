@@ -2,7 +2,6 @@
 
 .tableHead {
   font-size: 1.6rem;
-  border: 1px solid #ddd;
   display: flex;
   width: 1537px;
 }
@@ -17,8 +16,15 @@
   align-items: center;
 }
 
+.sorted {
+  background-color: #fff2f2;
+}
 .border-right {
   border-right: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+}
+.border-left {
+  border-left: 1px solid #ddd;
 }
 .text-verflow-ellipsis {
   text-overflow: ellipsis;
