@@ -1,6 +1,12 @@
 import faker from "faker";
 import _ from "lodash";
-import { FETCH_DATA, TOGGLE_SORT, SORT_DATA } from "./types";
+import {
+  FETCH_DATA,
+  TOGGLE_SORT,
+  SORT_DATA,
+  FILTER,
+  FETCH_FILTER
+} from "./types";
 faker.seed(783);
 
 function RoleMaker(number) {
@@ -20,7 +26,7 @@ const makeFake = index => {
     phone: faker.phone.phoneNumberFormat(),
     description: faker.lorem.text(),
     idNumber: faker.random.number(),
-    date: faker.date.recent(),
+    date: faker.date.recent().setHours(0, 0, 0, 0),
     payment: {
       amount: faker.commerce.price(),
       currency: faker.finance.currencySymbol()
@@ -30,12 +36,14 @@ const makeFake = index => {
 };
 
 export const loadData = () => async dispatch => {
-  const data = [...new Array(100)].map((_, index) => makeFake(index));
+  const data = [...new Array(100)].map((_, index) => makeFake(index + 1));
   dispatch({ type: FETCH_DATA, payload: data });
 };
 
-export const toggleSort = key => async (dispatch, getState) => {
-  dispatch({ type: TOGGLE_SORT, payload: { key } });
+export const toggleSort = (key = "do") => async (dispatch, getState) => {
+  if (key !== "do") {
+    dispatch({ type: TOGGLE_SORT, payload: { key } });
+  }
   const headers = getState().tableHeaders;
 
   const keys = [];
@@ -54,8 +62,60 @@ export const toggleSort = key => async (dispatch, getState) => {
     }
     values.push(header.direction);
   }
-  const unsortedData = getState().data.data;
+  const unSortedData = getState().data.isFiltered
+    ? getState().data.filteredData
+    : getState().data.data;
+  const sortedData = _.orderBy(unSortedData, [...keys], [...values]);
   console.log([...keys], [...values]);
-  const sortedData = _.orderBy(unsortedData, [...keys], [...values]);
   dispatch({ type: SORT_DATA, payload: sortedData });
 };
+
+export const filtify = (key, filter) => async (dispatch, getState) => {
+  dispatch({ type: FILTER, payload: { key, filter } });
+
+  const unFilteredData = getState().data.data;
+  const triggers = getState().filter;
+  if (triggers.length !== 0) {
+    const filteredData = unFilteredData.filter(d => {
+      let flag = 0;
+      for (let t of triggers) {
+        if (omgFilter(t, d[t.key])) {
+          flag += 1;
+        }
+      }
+      return flag === triggers.length;
+    });
+    dispatch({
+      type: FETCH_FILTER,
+      payload: { status: true, filteredData: filteredData }
+    });
+  } else {
+    dispatch({
+      type: FETCH_FILTER,
+      payload: { status: false, filteredData: [] }
+    });
+  }
+};
+
+function omgFilter({ key, filter }, value) {
+  switch (key) {
+    case "rank":
+      return value === filter;
+    case "fullName":
+      return value.toLowerCase().includes(filter.toLowerCase());
+    case "email":
+      return value.toLowerCase().includes(filter.toLowerCase());
+    case "LocationName":
+      return value.toLowerCase().includes(filter.toLowerCase());
+    case "isActive":
+      return value === true;
+    case "phone":
+      return value.toLowerCase().includes(filter.toLowerCase());
+    case "date":
+      return value === new Date(filter).setHours(0, 0, 0, 0);
+    case "role":
+      return value === filter;
+    default:
+      return false;
+  }
+}

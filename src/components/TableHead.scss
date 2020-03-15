@@ -79,7 +79,7 @@
 }
 .tableHead--payment {
   // min-width: $payment-width;
-  min-width: calc(#{$payment-width} + 20px);
+  min-width: calc(#{$payment-width} + 18px);
   max-width: $payment-width;
   // width: calc(#{$payment-width} - 1px);
   justify-content: center;

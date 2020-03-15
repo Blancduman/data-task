@@ -22,7 +22,7 @@ const Row = ({ index, style }) => {
     date,
     role,
     payment
-  } = useSelector(state => state.data.sorted[index]);
+  } = useSelector(state => state.data.showData[index]);
   const tableHeaders = useSelector(state => state.tableHeaders);
   const [headers, setHeaders] = useState({});
   useEffect(() => {
@@ -85,7 +85,7 @@ const Row = ({ index, style }) => {
           headers["date"] ? headers["date"] + " sorted-row" : ""
         }`}
       >
-        {date.toLocaleDateString(`${navigator.language}`)}
+        {new Date(date).toLocaleDateString(`${navigator.language}`)}
       </span>
       <span
         className={`tableRow--payment display-cell-flex text-verflow-ellipsis border-right tableRow--item-right ${
