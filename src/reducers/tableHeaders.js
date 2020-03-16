@@ -1,7 +1,7 @@
 import { TOGGLE_SORT } from "../actions/types";
 
 // const initialState = [];
-const initialState = [];
+const initialState = JSON.parse(localStorage.getItem("tableHeaders")) || [];
 
 const sorting = ["", "asc", "desc"];
 
@@ -16,9 +16,14 @@ export default (state = initialState, action) => {
               sorting.length
           ] === ""
         ) {
-          return [...state.slice(0, index), ...state.slice(index + 1)];
+          const newState = [
+            ...state.slice(0, index),
+            ...state.slice(index + 1)
+          ];
+          localStorage.setItem("tableHeaders", JSON.stringify(newState));
+          return newState;
         }
-        return [
+        const newState = [
           ...state.slice(0, index),
           {
             key: action.payload.key,
@@ -30,14 +35,18 @@ export default (state = initialState, action) => {
           },
           ...state.slice(index + 1)
         ];
+        localStorage.setItem("tableHeaders", JSON.stringify(newState));
+        return newState;
       }
-      return [
+      const newState = [
         ...state,
         {
           key: action.payload.key,
           direction: sorting[1]
         }
       ];
+      localStorage.setItem("tableHeaders", JSON.stringify(newState));
+      return newState;
     default:
       return state;
   }

@@ -12,8 +12,9 @@ const defaultHeaders = {
   payment: "",
   role: ""
 };
-const Row = ({ index, style }) => {
+export const Row = ({ index, style }) => {
   const {
+    id,
     rank,
     fullName,
     email,
@@ -37,7 +38,7 @@ const Row = ({ index, style }) => {
   }, [tableHeaders]);
 
   return (
-    <div style={{ ...style }} className="tableRow">
+    <div key={id} style={{ ...style }} className="tableRow">
       <span
         className={`tableRow--rank display-cell-flex text-verflow-ellipsis border-right border-left ${
           headers["rank"] ? headers["rank"] + " sorted-row" : ""
@@ -97,5 +98,3 @@ const Row = ({ index, style }) => {
     </div>
   );
 };
-
-export default Row;

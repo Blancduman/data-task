@@ -5,7 +5,8 @@ import {
   TOGGLE_SORT,
   SORT_DATA,
   FILTER,
-  FETCH_FILTER
+  FETCH_FILTER,
+  VIRTULIZED
 } from "./types";
 faker.seed(783);
 
@@ -66,12 +67,14 @@ export const toggleSort = (key = "do") => async (dispatch, getState) => {
     ? getState().data.filteredData
     : getState().data.data;
   const sortedData = _.orderBy(unSortedData, [...keys], [...values]);
-  console.log([...keys], [...values]);
+  // console.log([...keys], [...values]);
   dispatch({ type: SORT_DATA, payload: sortedData });
 };
 
-export const filtify = (key, filter) => async (dispatch, getState) => {
-  dispatch({ type: FILTER, payload: { key, filter } });
+export const filtify = (key = "do", filter) => async (dispatch, getState) => {
+  if (key !== "do") {
+    dispatch({ type: FILTER, payload: { key, filter } });
+  }
 
   const unFilteredData = getState().data.data;
   const triggers = getState().filter;
@@ -119,3 +122,7 @@ function omgFilter({ key, filter }, value) {
       return false;
   }
 }
+
+export const virtulized = () => async dispatch => {
+  dispatch({ type: VIRTULIZED });
+};

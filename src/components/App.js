@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FixedSizeList } from "react-window";
-import { loadData } from "../actions/index";
-import Row from "./Row";
+import { loadData, filtify, toggleSort } from "../actions/index";
+import { Row } from "./Row";
 import TableHead from "./TableHead";
 import FilterBottom from "./FilterBottom";
 
@@ -12,35 +12,69 @@ import "./App.css";
 
 function App(props) {
   const data = useSelector(state => state.data.showData);
+  const virtual = useSelector(state => state.virtulized);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(loadData());
+    dispatch(filtify());
+    dispatch(toggleSort());
   }, []);
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  // useEffect(() => {
+  //   console.log(data);
+  // }, [data]);
+
+  if (virtual)
+    return (
+      <div className="App" style={{ marginLeft: 25 }}>
+        <FilterBottom />
+        <TableHead />
+        <FixedSizeList
+          height={data.length > 17 ? 800 : data.length * 45 + 1}
+          itemCount={data.length}
+          itemSize={45}
+          width={1538}
+          style={{
+            overflowX: "hidden",
+            borderBottom: "1px solid #ddd",
+            overflowY: "scroll"
+          }}
+        >
+          {Row}
+        </FixedSizeList>
+      </div>
+    );
 
   return (
     <div className="App" style={{ marginLeft: 25 }}>
       <FilterBottom />
       <TableHead />
-      <FixedSizeList
-        height={data.length > 17 ? 800 : data.length * 45 + 1}
-        itemCount={data.length}
-        itemSize={45}
-        width={1538}
-        style={{
-          overflowX: "hidden",
-          borderBottom: "1px solid #ddd",
-          overflowY: "scroll"
-        }}
-      >
-        {Row}
-      </FixedSizeList>
+      <Dasasd data={data} />
     </div>
   );
 }
 
 export default App;
+
+const Dasasd = () => {
+  const data = useSelector(state => state.data.showData);
+  let counter = 0;
+  const as = data.map((i, index) => {
+    return <Row key={counter++} index={index} style={{ height: 44 }} />;
+  });
+
+  return (
+    <div
+      style={{
+        overflowX: "hidden",
+        borderBottom: "1px solid #ddd",
+        overflowY: "scroll",
+        height: 800,
+        width: 1538
+      }}
+    >
+      {as}
+    </div>
+  );
+};
