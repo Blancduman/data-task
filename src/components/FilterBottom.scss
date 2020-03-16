@@ -89,3 +89,43 @@ ul.breadcrumb li + li:before {
   color: black;
   content: "/\00a0";
 }
+
+.multiselect {
+  // width: 200px;
+}
+
+.selectBox {
+  position: relative;
+}
+
+.selectBox select {
+  width: 100%;
+  font-weight: bold;
+  height: 37px;
+  padding-top: 2px;
+}
+
+.overSelect {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+#checkboxes {
+  display: none;
+  border: 1px #dadada solid;
+  z-index: 1;
+  background-color: #fff;
+  width: 167px;
+  font-size: 1.2rem;
+}
+
+#checkboxes label {
+  display: block;
+}
+
+#checkboxes label:hover {
+  background-color: #1e90ff;
+}

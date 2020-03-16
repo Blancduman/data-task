@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Switch from "react-switch";
-import Select from "react-select";
 import { filtify, toggleSort, virtulized } from "../actions";
 
 import "./FilterBottom.scss";
@@ -9,6 +8,10 @@ import "./FilterBottom.scss";
 const FilterBottom = () => {
   const dispatch = useDispatch();
   const [filters, setFilters] = useState({});
+  const [roleExpanded, setRoleExpanded] = useState({
+    expanded: false,
+    display: "none"
+  });
   const beadcrum = useSelector(state => state.tableHeaders);
   const _filter = useSelector(state => state.filter);
   const virtual = useSelector(state => state.virtulized);
@@ -22,6 +25,13 @@ const FilterBottom = () => {
     // });
   };
 
+  const handleRoleExpanding = () => {
+    if (!roleExpanded.expanded) {
+      setRoleExpanded({ expanded: true, display: "block" });
+    } else {
+      setRoleExpanded({ expanded: false, display: "none" });
+    }
+  };
   useEffect(() => {
     let tmpFilters = {};
     for (let tmp of _filter) {
@@ -35,7 +45,12 @@ const FilterBottom = () => {
   const bread = () => {
     const crum = beadcrum.map(i => <li key={i.key}>{i.key}</li>);
 
-    return <ul className="breadcrumb">{crum}</ul>;
+    return (
+      <ul className="breadcrumb">
+        <li>Order fileds queue</li>
+        {crum}
+      </ul>
+    );
   };
 
   return (
@@ -45,10 +60,17 @@ const FilterBottom = () => {
         <div style={{ top: 5, display: "inline-block", position: "relative" }}>
           <Switch
             onChange={() =>
-              handleFilter("isActive", filters.isActive ? false : true)
+              handleFilter("isActive", filters.isActive ? "" : true)
             }
             checked={filters.isActive || false}
           />
+          {/* <Checkbox
+            checked={filters.isActive || false}
+            indeterminate={filters.isActive || ""}
+            onChange={() =>
+              handleFilter("isActive", filters.isActive ? "" : true)
+            }
+          /> */}
         </div>
       </label>
       <label style={{ marginLeft: 10 }}>
@@ -84,7 +106,7 @@ const FilterBottom = () => {
           value={filters.LocationName || ""}
           onChange={e => handleFilter("LocationName", e.target.value)}
         />
-        <Select
+        {/* <Select
           className="filter-bottom--role border height"
           menuPlacement="bottom"
           value={
@@ -99,7 +121,65 @@ const FilterBottom = () => {
             { value: "Activist", label: "Activist" },
             { value: "Mentor", label: "Mentor" }
           ]}
-        />
+        /> */}
+        <div
+          className="multiselect filter-bottom--role border height"
+          style={{ position: "relative", display: "inline-block" }}
+        >
+          <div className="selectBox" onClick={handleRoleExpanding}>
+            <select>
+              <option>Select an option</option>
+            </select>
+            <div className="overSelect"></div>
+          </div>
+          <div
+            id="checkboxes"
+            style={{ display: roleExpanded.display, position: "absolute" }}
+          >
+            <label htmlFor="one">
+              <input
+                type="checkbox"
+                id="one"
+                value={filters.role ? filters.role.Student : false}
+                onChange={e =>
+                  handleFilter("role", {
+                    ...filters.role,
+                    Student: filters.role ? !filters.role.Student : true
+                  })
+                }
+              />
+              Student
+            </label>
+            <label htmlFor="two">
+              <input
+                type="checkbox"
+                id="two"
+                value={filters.role ? filters.role.Activist : false}
+                onChange={e =>
+                  handleFilter("role", {
+                    ...filters.role,
+                    Activist: filters.role ? !filters.role.Activist : true
+                  })
+                }
+              />
+              Activist
+            </label>
+            <label htmlFor="three">
+              <input
+                type="checkbox"
+                id="three"
+                value={filters.role ? filters.role.Mentor : false}
+                onChange={e =>
+                  handleFilter("role", {
+                    ...filters.role,
+                    Mentor: filters.role ? !filters.role.Mentor : true
+                  })
+                }
+              />
+              Mentor
+            </label>
+          </div>
+        </div>
         {/* <select
           className="filter-bottom--role border height"
           value={filters.role}
@@ -127,7 +207,7 @@ const FilterBottom = () => {
           type="text"
           className="filter-bottom--payment border height"
           value={filters.payment || ""}
-          onChange={e => handleFilter("payment", Number(e.target.value))}
+          onChange={e => handleFilter("payment", e.target.value)}
         />
       </div>
     </>

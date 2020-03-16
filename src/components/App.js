@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FixedSizeList } from "react-window";
-import { loadData, filtify, toggleSort } from "../actions/index";
+import { loadData } from "../actions/index";
 import { Row } from "./Row";
 import TableHead from "./TableHead";
 import FilterBottom from "./FilterBottom";
@@ -12,12 +12,12 @@ import "./App.css";
 
 function App(props) {
   const data = useSelector(state => state.data.showData);
-  const isLoaded = useSelector(state => state.data.data) === [];
+  const isLoaded = useSelector(state => state.data.data).length !== 0;
   const virtual = useSelector(state => state.virtulized);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (isLoaded) dispatch(loadData());
+    if (!isLoaded) dispatch(loadData());
     // dispatch(filtify());
     // dispatch(toggleSort());
   }, []);
@@ -32,7 +32,7 @@ function App(props) {
         <FilterBottom />
         <TableHead />
         <FixedSizeList
-          height={data.length > 17 ? 800 : data.length * 45 + 1}
+          height={data.length > 15 ? 700 : data.length * 45 + 1}
           itemCount={data.length}
           itemSize={45}
           width={1538}
@@ -71,7 +71,7 @@ const Dasasd = () => {
         overflowX: "hidden",
         borderBottom: "1px solid #ddd",
         overflowY: "scroll",
-        height: 800,
+        height: 700,
         width: 1538
       }}
     >

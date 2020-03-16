@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
+import { selecting } from "../actions";
 import "./Row.scss";
 const defaultHeaders = {
   rank: "",
@@ -24,8 +24,10 @@ export const Row = ({ index, style }) => {
     role,
     payment
   } = useSelector(state => state.data.showData[index]);
+  const selected = useSelector(state => state.selected);
   const tableHeaders = useSelector(state => state.tableHeaders);
   const [headers, setHeaders] = useState({});
+  const dispatch = useDispatch();
   useEffect(() => {
     let tmpHeaders = {};
     for (let head of tableHeaders) {
@@ -37,8 +39,19 @@ export const Row = ({ index, style }) => {
     });
   }, [tableHeaders]);
 
+  const handleSelect = _index => {
+    dispatch(selecting(_index));
+  };
+
   return (
-    <div key={id} style={{ ...style }} className="tableRow">
+    <div
+      key={id}
+      style={{ ...style }}
+      className={`tableRow${
+        selected.findIndex(i => i === index) !== -1 ? " selected" : ""
+      }`}
+      onClick={() => handleSelect(index)}
+    >
       <span
         className={`tableRow--rank display-cell-flex text-verflow-ellipsis border-right border-left ${
           headers["rank"] ? headers["rank"] + " sorted-row" : ""

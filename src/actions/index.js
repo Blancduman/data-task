@@ -6,7 +6,8 @@ import {
   SORT_DATA,
   FILTER,
   FETCH_FILTER,
-  VIRTULIZED
+  VIRTULIZED,
+  SELECT
 } from "./types";
 faker.seed(783);
 
@@ -37,7 +38,7 @@ const makeFake = index => {
 };
 
 export const loadData = () => async dispatch => {
-  const data = [...new Array(100)].map((_, index) => makeFake(index + 1));
+  const data = [...new Array(1000)].map((_, index) => makeFake(index + 1));
   dispatch({ type: FETCH_DATA, payload: data });
 };
 
@@ -74,6 +75,16 @@ export const toggleSort = (key = "do") => async (dispatch, getState) => {
 export const filtify = (key = "do", filter) => async (dispatch, getState) => {
   if (key !== "do") {
     dispatch({ type: FILTER, payload: { key, filter } });
+  }
+  if (key === "role") {
+    let tmp = {};
+    for (let r in filter) {
+      if (filter[r]) tmp[r] = filter[r];
+    }
+    dispatch({
+      type: FILTER,
+      payload: { key, filter: _.isEmpty(tmp) ? "" : tmp }
+    });
   }
 
   const unFilteredData = getState().data.data;
@@ -116,8 +127,18 @@ function omgFilter({ key, filter }, value) {
       return value.toLowerCase().includes(filter.toLowerCase());
     case "date":
       return value === new Date(filter).setHours(0, 0, 0, 0);
-    case "role":
-      return value === filter;
+    case "role": {
+      for (let role in filter) {
+        if (value === role) {
+          return true;
+        }
+      }
+      return false;
+    }
+    case "payment":
+      return `${value.currency} ${value.amount}`
+        .toLowerCase()
+        .includes(filter.toLowerCase());
     default:
       return false;
   }
@@ -125,4 +146,8 @@ function omgFilter({ key, filter }, value) {
 
 export const virtulized = () => async dispatch => {
   dispatch({ type: VIRTULIZED });
+};
+
+export const selecting = index => async dispatch => {
+  dispatch({ type: SELECT, payload: { index: index } });
 };
