@@ -21,60 +21,68 @@
 
 .filter-bottom--rank {
   // min-width: calc(#{$rank-width} - 4px);
-  width: calc(#{$rank-width} - 3px);
-  max-width: $rank-width;
+  // width: calc(#{$rank-width} - 3px);
+  min-width: calc(#{$rank-width} - 1px);
+  max-width: calc(#{$rank-width} - 1px);
   // width: calc(#{$rank-width} - 1px);
 }
 .filter-bottom--fullname {
   // min-width: $fullname-width;
-  min-width: calc(#{$fullname-width} + 4px);
-  max-width: $fullname-width;
+  // min-width: calc(#{$fullname-width} + 4px);
+  min-width: calc(#{$fullname-width} + 9px);
+  max-width: calc(#{$fullname-width} + 9px);
   // width: calc(#{$fullname-width} - 1px);
 }
 .filter-bottom--email {
   // min-width: $email-width;
-  min-width: calc(#{$email-width} + 2px);
-  max-width: $email-width;
+  // min-width: calc(#{$email-width} + 2px);
+  min-width: calc(#{$email-width} + 9px);
+  max-width: calc(#{$email-width} + 9px);
   // width: calc(#{$email-width} - 1px);
   justify-content: flex-start;
 }
 .filter-bottom--LocationName {
   // min-width: $LocationName-width;
-  min-width: calc(#{$LocationName-width} + 4px);
-  max-width: $LocationName-width;
+  // min-width: calc(#{$LocationName-width} + 4px);
+  min-width: calc(#{$LocationName-width} + 9px);
+  max-width: calc(#{$LocationName-width} + 9px);
   // width: calc(#{$LocationName-width} - 1px);
 }
-.filter-bottom--phone {
-  width: calc(#{$phone-width} - 5px);
-  // min-width: $phone-width;
-  max-width: $phone-width;
-  // width: calc(#{$phone-width} - 1px);
-}
-.filter-bottom--date {
-  // min-width: $date-width;
-  width: calc(#{$date-width} - 5px);
-  font-size: 12px;
-  padding-top: 3px;
-  // min-width: calc(#{$date-width} - 3px);
-  max-width: $date-width;
-  // width: calc(#{$date-width} - 1px);
-}
-.filter-bottom--payment {
-  // min-width: $payment-width;
-  min-width: calc(#{$payment-width} + 7px);
-  max-width: calc(#{$payment-width} + 17px);
-  // width: calc(#{$payment-width} - 1px);
-}
 .filter-bottom--role {
-  // min-width: $currency-width;
-  min-width: calc(#{$role-width} + 48px);
-  max-width: $role-width;
+  // min-width: calc(#{$role-width} + 48px);
+  min-width: calc(#{$role-width} + 1px);
+  max-width: calc(#{$role-width} + 1px);
   display: inline-block;
   font-size: 15px;
   // width: calc(#{$currency-width} - 1px);
 }
+.filter-bottom--phone {
+  // width: calc(#{$phone-width} - 5px);
+  // min-width: $phone-width;
+  min-width: calc(#{$phone-width} - 1px);
+  max-width: calc(#{$phone-width} - 1px);
+  // width: calc(#{$phone-width} - 1px);
+}
+.filter-bottom--date {
+  // min-width: $date-width;
+  // width: calc(#{$date-width} - 5px);
+  font-size: 12px;
+  padding-top: 3px;
+  // min-width: calc(#{$date-width} - 3px);
+  min-width: calc(#{$date-width} - 2px);
+  max-width: calc(#{$date-width} - 2px);
+  // width: calc(#{$date-width} - 1px);
+}
+.filter-bottom--payment {
+  min-width: calc(#{$payment-width} + 20px);
+  max-width: calc(#{$payment-width} + 20px);
+  // min-width: calc(#{$payment-width} + 7px);
+  // max-width: calc(#{$payment-width} + 17px);
+  // width: calc(#{$payment-width} - 1px);
+}
 
 ul.breadcrumb {
+  width: 1337px;
   padding: 10px 16px;
   list-style: none;
   background-color: #eee;

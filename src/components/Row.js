@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selecting } from "../actions";
 import "./Row.scss";
-const defaultHeaders = {
-  rank: "",
-  fullName: "",
-  email: "",
-  LocationName: "",
-  phone: "",
-  date: "",
-  payment: "",
-  role: ""
-};
+// const defaultHeaders = {
+//   rank: "",
+//   fullName: "",
+//   email: "",
+//   LocationName: "",
+//   phone: "",
+//   date: "",
+//   payment: "",
+//   role: ""
+// };
 export const Row = ({ index, style }) => {
   const {
     id,
@@ -25,20 +25,21 @@ export const Row = ({ index, style }) => {
     payment
   } = useSelector(state => state.data.showData[index]);
   const selected = useSelector(state => state.selected);
-  const hide = useSelector(state => state.hide);
-  const tableHeaders = useSelector(state => state.tableHeaders);
-  const [headers, setHeaders] = useState({});
+  const notHide = useSelector(state => state.hide);
+  // const hide = useSelector(state => state.hide);
+  // const tableHeaders = useSelector(state => state.tableHeaders);
+  // const [headers, setHeaders] = useState({});
   const dispatch = useDispatch();
-  useEffect(() => {
-    let tmpHeaders = {};
-    for (let head of tableHeaders) {
-      tmpHeaders[head.key] = head.direction;
-    }
-    setHeaders({
-      ...defaultHeaders,
-      ...tmpHeaders
-    });
-  }, [tableHeaders]);
+  // useEffect(() => {
+  //   let tmpHeaders = {};
+  //   for (let head of tableHeaders) {
+  //     tmpHeaders[head.key] = head.direction;
+  //   }
+  //   setHeaders({
+  //     ...defaultHeaders,
+  //     ...tmpHeaders
+  //   });
+  // }, [tableHeaders]);
 
   const handleSelect = _index => {
     dispatch(selecting(_index));
@@ -53,62 +54,46 @@ export const Row = ({ index, style }) => {
       }`}
       onClick={() => handleSelect(index)}
     >
-      <span
-        className={`tableRow--rank display-cell-flex text-verflow-ellipsis border-right border-left ${
-          headers["rank"] ? headers["rank"] + " sorted-row" : ""
-        }`}
-      >
-        {rank}
-      </span>
-      <span
-        className={`tableRow--fullname display-cell-flex text-verflow-ellipsis border-right tableRow--item-left ${
-          headers["fullName"] ? headers["fullName"] + " sorted-row" : ""
-        }`}
-      >
-        {fullName}
-      </span>
-      <span
-        className={`tableRow--email display-cell-flex text-verflow-ellipsis border-right tableRow--item-left ${
-          headers["email"] ? headers["email"] + " sorted-row" : ""
-        }`}
-      >
-        {email}
-      </span>
-      <span
-        className={`tableRow--LocationName display-cell-flex text-verflow-ellipsis border-right tableRow--item-left ${
-          headers["LocationName"] ? headers["LocationName"] + " sorted-row" : ""
-        }`}
-      >
-        {LocationName}
-      </span>
-      <span
-        className={`tableRow--phone display-cell-flex text-verflow-ellipsis border-right ${
-          headers["role"] ? headers["role"] + " sorted-row" : ""
-        }`}
-      >
-        {role}
-      </span>
-      <span
-        className={`tableRow--phone display-cell-flex text-verflow-ellipsis border-right ${
-          headers["phone"] ? headers["phone"] + " sorted-row" : ""
-        }`}
-      >
-        {phone}
-      </span>
-      <span
-        className={`tableRow--date display-cell-flex text-verflow-ellipsis border-right ${
-          headers["date"] ? headers["date"] + " sorted-row" : ""
-        }`}
-      >
-        {new Date(date).toLocaleDateString(`${navigator.language}`)}
-      </span>
-      <span
-        className={`tableRow--payment display-cell-flex text-verflow-ellipsis border-right tableRow--item-right ${
-          headers["payment"] ? headers["payment"] + " sorted-row" : ""
-        }`}
-      >
-        {`${payment.currency} ${payment.amount}`}
-      </span>
+      {notHide[0].status && (
+        <span className="tableRow--rank display-cell-flex text-verflow-ellipsis border-right border-left">
+          {rank}
+        </span>
+      )}
+      {notHide[1].status && (
+        <span className="tableRow--fullname display-cell-flex text-verflow-ellipsis border-right tableRow--item-left">
+          {fullName}
+        </span>
+      )}
+      {notHide[2].status && (
+        <span className="tableRow--email display-cell-flex text-verflow-ellipsis border-right tableRow--item-left">
+          {email}
+        </span>
+      )}
+      {notHide[3].status && (
+        <span className="tableRow--LocationName display-cell-flex text-verflow-ellipsis border-right tableRow--item-left">
+          {LocationName}
+        </span>
+      )}
+      {notHide[4].status && (
+        <span className="tableRow--role display-cell-flex text-verflow-ellipsis border-right">
+          {role}
+        </span>
+      )}
+      {notHide[5].status && (
+        <span className="tableRow--phone display-cell-flex text-verflow-ellipsis border-right">
+          {phone}
+        </span>
+      )}
+      {notHide[6].status && (
+        <span className="tableRow--date display-cell-flex text-verflow-ellipsis border-right">
+          {new Date(date).toLocaleDateString(`${navigator.language}`)}
+        </span>
+      )}
+      {notHide[7].status && (
+        <span className="tableRow--payment display-cell-flex text-verflow-ellipsis border-right tableRow--item-right">
+          {`${payment.currency} ${payment.amount}`}
+        </span>
+      )}
     </div>
   );
 };

@@ -8,7 +8,8 @@ import {
   FETCH_FILTER,
   VIRTULIZED,
   SELECT,
-  HIDE
+  HIDE,
+  HIDE_FIELDS
 } from "./types";
 faker.seed(783);
 
@@ -153,6 +154,11 @@ export const selecting = index => async dispatch => {
   dispatch({ type: SELECT, payload: { index: index } });
 };
 
-export const hide = key => async dispatch => {
+export const hide = key => async (dispatch, getState) => {
   dispatch({ type: HIDE, payload: { key: key } });
+  const fields = getState().hide;
+  let valuesForOmit = [];
+  for (let field of fields) {
+    if (!field.status) valuesForOmit.push(field.key);
+  }
 };

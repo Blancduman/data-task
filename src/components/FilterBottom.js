@@ -112,7 +112,7 @@ const FilterBottom = () => {
           style={{ position: "relative", display: "inline-block" }}
         >
           <div className="selectBox" onClick={handleRoleExpanding}>
-            <select>
+            <select style={{ borderRightWidth: 0 }}>
               <option>{`${
                 filters.role
                   ? `${filters.role.Student ? "Student;" : ""} 

@@ -1,7 +1,7 @@
 import { HIDE } from "../actions/types";
 
 const defaultState = [
-  { key: "key", status: true },
+  { key: "rank", status: true },
   { key: "fullName", status: true },
   { key: "email", status: true },
   { key: "LocationName", status: true },

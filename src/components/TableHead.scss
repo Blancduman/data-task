@@ -34,7 +34,7 @@
 .tableHead--rank {
   // min-width: calc(#{$rank-width} - 4px);
   padding-left: 10px;
-  min-width: calc(#{$rank-width} - 12px);
+  min-width: calc(#{$rank-width} - 10px);
   max-width: $rank-width;
   // width: calc(#{$rank-width} - 1px);
   justify-content: flex-start;
@@ -42,7 +42,8 @@
 .tableHead--fullname {
   // min-width: $fullname-width;
   padding-left: 10px;
-  min-width: calc(#{$fullname-width} - 5px);
+  // min-width: calc(#{$fullname-width} - 5px);
+  min-width: $fullname-width;
   max-width: $fullname-width;
   // width: calc(#{$fullname-width} - 1px);
   justify-content: flex-start;
@@ -50,7 +51,8 @@
 .tableHead--email {
   // min-width: $email-width;
   padding-left: 10px;
-  min-width: calc(#{$email-width} - 7px);
+  // min-width: calc(#{$email-width} - 7px);
+  min-width: $email-width;
   max-width: $email-width;
   // width: calc(#{$email-width} - 1px);
   justify-content: flex-start;
@@ -58,37 +60,41 @@
 .tableHead--LocationName {
   // min-width: $LocationName-width;
   padding-left: 10px;
-  min-width: calc(#{$LocationName-width} - 5px);
+  // min-width: calc(#{$LocationName-width} - 5px);
+  min-width: $LocationName-width;
   max-width: $LocationName-width;
   // width: calc(#{$LocationName-width} - 1px);
   justify-content: flex-start;
 }
+.tableHead--role {
+  // min-width: $currency-width;
+  // min-width: calc(#{$role-width} + 47px);
+  min-width: $role-width;
+  max-width: $role-width;
+  // width: calc(#{$currency-width} - 1px);
+  justify-content: center;
+}
 .tableHead--phone {
-  min-width: calc(#{$phone-width} - 4px);
+  // min-width: calc(#{$phone-width} - 4px);
   // min-width: $phone-width;
+  min-width: $phone-width;
   max-width: $phone-width;
   // width: calc(#{$phone-width} - 1px);
   justify-content: center;
 }
 .tableHead--date {
   // min-width: $date-width;
-  min-width: calc(#{$date-width} - 3px);
+  // min-width: calc(#{$date-width} - 3px);
+  min-width: $date-width;
   max-width: $date-width;
   // width: calc(#{$date-width} - 1px);
   justify-content: center;
 }
 .tableHead--payment {
   // min-width: $payment-width;
-  min-width: calc(#{$payment-width} + 18px);
+  min-width: calc(#{$payment-width} + 20px);
   max-width: $payment-width;
   // width: calc(#{$payment-width} - 1px);
-  justify-content: center;
-}
-.tableHead--role {
-  // min-width: $currency-width;
-  min-width: calc(#{$role-width} + 47px);
-  max-width: $role-width;
-  // width: calc(#{$currency-width} - 1px);
   justify-content: center;
 }
 

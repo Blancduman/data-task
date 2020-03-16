@@ -36,7 +36,7 @@ function App(props) {
           height={data.length > 15 ? 700 : data.length * 45 + 1}
           itemCount={data.length}
           itemSize={45}
-          width={1538}
+          width={1369}
           style={{
             overflowX: "hidden",
             borderBottom: "1px solid #ddd",
@@ -75,7 +75,7 @@ const Dasasd = () => {
         borderBottom: "1px solid #ddd",
         overflowY: "scroll",
         height: 700,
-        width: 1538
+        width: 1369
       }}
     >
       {as}

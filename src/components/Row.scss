@@ -32,35 +32,43 @@
   white-space: nowrap;
 }
 .tableRow--rank {
-  width: $rank-width;
+  max-width: $rank-width;
+  min-width: $rank-width;
   justify-content: center;
 }
 .tableRow--fullname {
-  width: $fullname-width;
+  max-width: $fullname-width;
+  min-width: $fullname-width;
   justify-content: flex-start;
 }
 .tableRow--email {
-  width: $email-width;
+  max-width: $email-width;
+  min-width: $email-width;
   justify-content: flex-start;
 }
 .tableRow--LocationName {
-  width: $LocationName-width;
+  max-width: $LocationName-width;
+  min-width: $LocationName-width;
   justify-content: flex-start;
 }
 .tableRow--phone {
-  width: $phone-width;
+  max-width: $phone-width;
+  min-width: $phone-width;
   justify-content: center;
 }
 .tableRow--date {
-  width: $date-width;
+  max-width: $date-width;
+  min-width: $date-width;
   justify-content: center;
 }
 .tableRow--payment {
-  width: $payment-width;
+  max-width: $payment-width;
+  min-width: $payment-width;
   justify-content: flex-end;
 }
 .tableRow--role {
-  width: $role-width;
+  max-width: $role-width;
+  min-width: $role-width;
   justify-content: center;
 }
 

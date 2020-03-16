@@ -1,4 +1,9 @@
-import { FETCH_DATA, SORT_DATA, FETCH_FILTER } from "../actions/types";
+import {
+  FETCH_DATA,
+  SORT_DATA,
+  FETCH_FILTER,
+  HIDE_FIELDS
+} from "../actions/types";
 
 const initialState = JSON.parse(localStorage.getItem("data")) || {
   data: [],
@@ -24,6 +29,14 @@ export default (state = initialState, action) => {
         ...state,
         isFiltered: action.payload.status,
         filteredData: action.payload.filteredData
+      };
+      localStorage.setItem("data", JSON.stringify(newState));
+      return newState;
+    }
+    case HIDE_FIELDS: {
+      const newState = {
+        ...state,
+        showData: action.payload
       };
       localStorage.setItem("data", JSON.stringify(newState));
       return newState;
