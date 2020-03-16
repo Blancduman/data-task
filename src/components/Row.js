@@ -25,6 +25,7 @@ export const Row = ({ index, style }) => {
     payment
   } = useSelector(state => state.data.showData[index]);
   const selected = useSelector(state => state.selected);
+  const hide = useSelector(state => state.hide);
   const tableHeaders = useSelector(state => state.tableHeaders);
   const [headers, setHeaders] = useState({});
   const dispatch = useDispatch();

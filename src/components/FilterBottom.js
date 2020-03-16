@@ -36,6 +36,7 @@ const FilterBottom = () => {
     let tmpFilters = {};
     for (let tmp of _filter) {
       tmpFilters[tmp.key] = tmp.filter;
+      console.log(tmp.key === "role" ? tmp.filter : "");
     }
     setFilters({
       ...tmpFilters
@@ -106,29 +107,19 @@ const FilterBottom = () => {
           value={filters.LocationName || ""}
           onChange={e => handleFilter("LocationName", e.target.value)}
         />
-        {/* <Select
-          className="filter-bottom--role border height"
-          menuPlacement="bottom"
-          value={
-            filters.role === ""
-              ? { value: "", label: "..." }
-              : { value: filters.role, label: filters.role }
-          }
-          onChange={selectedOpt => handleFilter("role", selectedOpt.value)}
-          options={[
-            { value: "", label: "..." },
-            { value: "Student", label: "Student" },
-            { value: "Activist", label: "Activist" },
-            { value: "Mentor", label: "Mentor" }
-          ]}
-        /> */}
         <div
           className="multiselect filter-bottom--role border height"
           style={{ position: "relative", display: "inline-block" }}
         >
           <div className="selectBox" onClick={handleRoleExpanding}>
             <select>
-              <option>Select an option</option>
+              <option>{`${
+                filters.role
+                  ? `${filters.role.Student ? "Student;" : ""} 
+                      ${filters.role.Activist ? "Activist;" : ""} 
+                      ${filters.role.Mentor ? "Mentor;" : ""}`
+                  : ""
+              }`}</option>
             </select>
             <div className="overSelect"></div>
           </div>
@@ -140,7 +131,7 @@ const FilterBottom = () => {
               <input
                 type="checkbox"
                 id="one"
-                value={filters.role ? filters.role.Student : false}
+                checked={(filters.role ? filters.role.Student : false) || false}
                 onChange={e =>
                   handleFilter("role", {
                     ...filters.role,
@@ -154,7 +145,9 @@ const FilterBottom = () => {
               <input
                 type="checkbox"
                 id="two"
-                value={filters.role ? filters.role.Activist : false}
+                checked={
+                  (filters.role ? filters.role.Activist : false) || false
+                }
                 onChange={e =>
                   handleFilter("role", {
                     ...filters.role,
@@ -168,7 +161,7 @@ const FilterBottom = () => {
               <input
                 type="checkbox"
                 id="three"
-                value={filters.role ? filters.role.Mentor : false}
+                checked={(filters.role ? filters.role.Mentor : false) || false}
                 onChange={e =>
                   handleFilter("role", {
                     ...filters.role,
@@ -180,17 +173,6 @@ const FilterBottom = () => {
             </label>
           </div>
         </div>
-        {/* <select
-          className="filter-bottom--role border height"
-          value={filters.role}
-          multiple
-          onChange={e => handleFilter("role", e.target.value)}
-        > 
-          <option value=""></option>
-          <option value="Student">Student</option>
-          <option value="Activist">Activist</option>
-          <option value="Mentor">Mentor</option>
-        </select>*/}
         <input
           type="text"
           className="filter-bottom--phone border height"

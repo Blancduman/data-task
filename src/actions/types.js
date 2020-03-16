@@ -7,3 +7,4 @@ export const VIRTULIZED = "VIRTULIZED";
 export const FETCH_FILTER = "FETCH_FILTER";
 export const SORT_DATA = "SORT_DATA";
 export const SELECT = "SELECT";
+export const HIDE = "HIDE";

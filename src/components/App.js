@@ -5,6 +5,7 @@ import { loadData } from "../actions/index";
 import { Row } from "./Row";
 import TableHead from "./TableHead";
 import FilterBottom from "./FilterBottom";
+import HideFields from "./HideFields";
 
 import "./App.css";
 
@@ -20,7 +21,7 @@ function App(props) {
     if (!isLoaded) dispatch(loadData());
     // dispatch(filtify());
     // dispatch(toggleSort());
-  }, []);
+  }, [isLoaded, dispatch]);
 
   // useEffect(() => {
   //   console.log(data);
@@ -44,6 +45,7 @@ function App(props) {
         >
           {Row}
         </FixedSizeList>
+        <HideFields />
       </div>
     );
 
@@ -52,6 +54,7 @@ function App(props) {
       <FilterBottom />
       <TableHead />
       <Dasasd data={data} />
+      <HideFields />
     </div>
   );
 }

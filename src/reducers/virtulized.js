@@ -1,7 +1,6 @@
 import { VIRTULIZED } from "../actions/types";
 
 const item = localStorage.getItem("virtulized");
-console.log(item);
 
 const initialState = item !== null ? (item === "true" ? true : false) : true;
 

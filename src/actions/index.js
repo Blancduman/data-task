@@ -7,7 +7,8 @@ import {
   FILTER,
   FETCH_FILTER,
   VIRTULIZED,
-  SELECT
+  SELECT,
+  HIDE
 } from "./types";
 faker.seed(783);
 
@@ -150,4 +151,8 @@ export const virtulized = () => async dispatch => {
 
 export const selecting = index => async dispatch => {
   dispatch({ type: SELECT, payload: { index: index } });
+};
+
+export const hide = key => async dispatch => {
+  dispatch({ type: HIDE, payload: { key: key } });
 };
