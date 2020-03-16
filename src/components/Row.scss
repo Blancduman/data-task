@@ -71,6 +71,11 @@
   min-width: $role-width;
   justify-content: center;
 }
+.tableRow--active {
+  max-width: $active-width;
+  min-width: $active-width;
+  justify-content: center;
+}
 
 .selected {
   background-color: rgb(93, 236, 243);

@@ -8,7 +8,8 @@ import {
   FETCH_FILTER,
   VIRTULIZED,
   SELECT,
-  HIDE
+  HIDE,
+  DELETE
 } from "./types";
 faker.seed(783);
 
@@ -27,8 +28,6 @@ const makeFake = index => {
     LocationName: faker.address.city(),
     isActive: faker.random.boolean(),
     phone: faker.phone.phoneNumberFormat(),
-    description: faker.lorem.text(),
-    idNumber: faker.random.number(),
     date: faker.date.recent().setHours(0, 0, 0, 0),
     payment: {
       amount: faker.commerce.price(),
@@ -153,11 +152,86 @@ export const selecting = index => async dispatch => {
   dispatch({ type: SELECT, payload: { index: index } });
 };
 
-export const hide = key => async (dispatch, getState) => {
+export const hide = key => async dispatch => {
   dispatch({ type: HIDE, payload: { key: key } });
-  const fields = getState().hide;
-  let valuesForOmit = [];
-  for (let field of fields) {
-    if (!field.status) valuesForOmit.push(field.key);
-  }
 };
+export const deleteSelected = () => (dispatch, getState) => {
+  dispatch({ type: DELETE, payload: getState().selected });
+};
+
+export const exportCSV = () => (dispatch, getState) => {
+  const headers = getState().hide.reduce((result, i) => {
+    if (i.key === "id") {
+      return { ...result, [i.key]: "id" };
+    }
+    if (i.status) {
+      switch (i.key) {
+        case "rank":
+          return { ...result, [i.key]: "Rank" };
+        case "fullName":
+          return { ...result, [i.key]: "FullName" };
+        case "email":
+          return { ...result, [i.key]: "Email" };
+        case "LocationName":
+          return { ...result, [i.key]: "Location" };
+        case "phone":
+          return { ...result, [i.key]: "Phone" };
+        case "date":
+          return { ...result, [i.key]: "Date" };
+        case "payment":
+          return { ...result, [i.key]: "Payment" };
+        case "role":
+          return { ...result, [i.key]: "Role" };
+        case "isActive":
+          return { ...result, [i.key]: "isActive" };
+        default:
+          break;
+      }
+    }
+    return result;
+  }, {});
+
+  const data = getState()
+    .data.showData.slice()
+    .map(i => {
+      i.payment = `${i.payment.currency} ${i.payment.amount}`;
+      i.date = new Date(i.date).toLocaleDateString(navigator.language);
+      return _.pick(i, _.keys(headers));
+    });
+
+  data.unshift(headers);
+
+  const jsonObject = JSON.stringify(data);
+
+  const csv = convertToCSV(jsonObject);
+  const exportedFilename = "For real_questionmark.csv";
+
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.setAttribute("href", url);
+  link.setAttribute("download", exportedFilename);
+  link.style.visibility = "hidden";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
+
+function convertToCSV(objArray) {
+  var array = typeof objArray != "object" ? JSON.parse(objArray) : objArray;
+  var str = "";
+
+  for (var i = 0; i < array.length; i++) {
+    var line = "";
+    for (var index in array[i]) {
+      if (line != "") line += ",";
+
+      line += array[i][index];
+    }
+
+    str += line + "\r\n";
+  }
+
+  return str;
+}

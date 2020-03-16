@@ -8,4 +8,4 @@ export const FETCH_FILTER = "FETCH_FILTER";
 export const SORT_DATA = "SORT_DATA";
 export const SELECT = "SELECT";
 export const HIDE = "HIDE";
-export const HIDE_FIELDS = "HIDE_FIELDS";
+export const DELETE = "DELETE";

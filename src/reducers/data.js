@@ -1,9 +1,4 @@
-import {
-  FETCH_DATA,
-  SORT_DATA,
-  FETCH_FILTER,
-  HIDE_FIELDS
-} from "../actions/types";
+import { FETCH_DATA, SORT_DATA, FETCH_FILTER, DELETE } from "../actions/types";
 
 const initialState = JSON.parse(localStorage.getItem("data")) || {
   data: [],
@@ -33,11 +28,19 @@ export default (state = initialState, action) => {
       localStorage.setItem("data", JSON.stringify(newState));
       return newState;
     }
-    case HIDE_FIELDS: {
+    case DELETE: {
+      const newShowData = state.showData.filter(
+        i => action.payload.findIndex(i.id) === -1
+      );
+      const newData = state.data.filter(
+        i => action.payload.findIndex(i.id) === -1
+      );
       const newState = {
         ...state,
-        showData: action.payload
+        showData: newShowData,
+        data: newData
       };
+
       localStorage.setItem("data", JSON.stringify(newState));
       return newState;
     }

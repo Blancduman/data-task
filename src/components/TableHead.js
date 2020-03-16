@@ -13,7 +13,8 @@ const defaultHeaders = {
   phone: "",
   date: "",
   payment: "",
-  role: ""
+  role: "",
+  isActive: ""
 };
 
 const TableHead = () => {
@@ -112,6 +113,16 @@ const TableHead = () => {
           onClick={() => toggleClick("payment")}
         >
           Payment
+        </span>
+      )}
+      {notHide[8].status && (
+        <span
+          className={`tableHead--activity display-cell-flex border-right sort-by${
+            headers["isActive"] ? headers["isActive"] + " sorted" : ""
+          }`}
+          onClick={() => toggleClick("isActive")}
+        >
+          Activity
         </span>
       )}
     </div>

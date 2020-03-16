@@ -74,11 +74,36 @@
   // width: calc(#{$date-width} - 1px);
 }
 .filter-bottom--payment {
-  min-width: calc(#{$payment-width} + 20px);
-  max-width: calc(#{$payment-width} + 20px);
+  min-width: calc(#{$payment-width} + 10px);
+  max-width: calc(#{$payment-width} + 10px);
   // min-width: calc(#{$payment-width} + 7px);
   // max-width: calc(#{$payment-width} + 17px);
   // width: calc(#{$payment-width} - 1px);
+}
+.filter-bottom--activity {
+  // text-align: center;
+  // vertical-align: middle;
+  min-width: calc(#{$active-width} + 9px);
+  max-width: calc(#{$active-width} + 9px);
+  display: inline-block;
+  text-align: center;
+  padding-top: 7px;
+  padding-bottom: 9px;
+  border: 1px solid #ddd;
+  border-bottom-width: 0px;
+
+  // textAlign: "center",
+  //         verticalAlign: "middle",
+  //         padding: "0 54px",
+  //         border: "1px solid #ddd",
+  //         borderBottomWidth: 0
+  // margin: 0;
+  // display: inline-flex;
+  // top: 12px;
+  // position: relative;
+  // padding-left: 31px;
+  // padding-top: 3px;
+  // border: 1px solid #ddd;
 }
 
 ul.breadcrumb {

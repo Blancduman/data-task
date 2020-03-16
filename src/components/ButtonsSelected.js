@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { loadData } from "../actions";
+import { loadData, exportCSV, deleteSelected } from "../actions";
 
 import "./ButtonsSelected.scss";
 
@@ -49,7 +49,11 @@ const ButtonsSelected = () => {
           </svg>
         </li>
         <li style={{ display: "inline-block" }}>
-          <svg className="svg-icon" viewBox="0 0 20 20">
+          <svg
+            className="svg-icon"
+            viewBox="0 0 20 20"
+            onClick={() => dispatch(deleteSelected())}
+          >
             <path
               fill="none"
               d="M15.898,4.045c-0.271-0.272-0.713-0.272-0.986,0l-4.71,4.711L5.493,4.045c-0.272-0.272-0.714-0.272-0.986,0s-0.272,0.714,0,0.986l4.709,4.711l-4.71,4.711c-0.272,0.271-0.272,0.713,0,0.986c0.136,0.136,0.314,0.203,0.492,0.203c0.179,0,0.357-0.067,0.493-0.203l4.711-4.711l4.71,4.711c0.137,0.136,0.314,0.203,0.494,0.203c0.178,0,0.355-0.067,0.492-0.203c0.273-0.273,0.273-0.715,0-0.986l-4.711-4.711l4.711-4.711C16.172,4.759,16.172,4.317,15.898,4.045z"
@@ -57,7 +61,11 @@ const ButtonsSelected = () => {
           </svg>
         </li>
         <li style={{ display: "inline-block" }}>
-          <svg className="svg-icon" viewBox="0 0 20 20">
+          <svg
+            className="svg-icon"
+            viewBox="0 0 20 20"
+            onClick={() => dispatch(exportCSV())}
+          >
             <path
               fill="none"
               d="M9.634,10.633c0.116,0.113,0.265,0.168,0.414,0.168c0.153,0,0.308-0.06,0.422-0.177l4.015-4.111c0.229-0.235,0.225-0.608-0.009-0.836c-0.232-0.229-0.606-0.222-0.836,0.009l-3.604,3.689L6.35,5.772C6.115,5.543,5.744,5.55,5.514,5.781C5.285,6.015,5.29,6.39,5.522,6.617L9.634,10.633z"

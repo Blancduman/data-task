@@ -22,7 +22,8 @@ export const Row = ({ index, style }) => {
     phone,
     date,
     role,
-    payment
+    payment,
+    isActive
   } = useSelector(state => state.data.showData[index]);
   const selected = useSelector(state => state.selected);
   const notHide = useSelector(state => state.hide);
@@ -50,9 +51,9 @@ export const Row = ({ index, style }) => {
       key={id}
       style={{ ...style }}
       className={`tableRow${
-        selected.findIndex(i => i === index) !== -1 ? " selected" : ""
+        selected.findIndex(i => i === id) !== -1 ? " selected" : ""
       }`}
-      onClick={() => handleSelect(index)}
+      onClick={() => handleSelect(id)}
     >
       {notHide[0].status && (
         <span className="tableRow--rank display-cell-flex text-verflow-ellipsis border-right border-left">
@@ -92,6 +93,11 @@ export const Row = ({ index, style }) => {
       {notHide[7].status && (
         <span className="tableRow--payment display-cell-flex text-verflow-ellipsis border-right tableRow--item-right">
           {`${payment.currency} ${payment.amount}`}
+        </span>
+      )}
+      {notHide[8].status && (
+        <span className="tableRow--active display-cell-flex text-verflow-ellipsis border-right">
+          {(isActive && "✓") || "×"}
         </span>
       )}
     </div>
