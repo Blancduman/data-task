@@ -1,4 +1,4 @@
-import { SELECT } from "../actions/types";
+import { SELECT, FETCH_DATA } from "../actions/types";
 
 const initialState = JSON.parse(localStorage.getItem("selected")) || [];
 
@@ -12,6 +12,11 @@ export default (state = initialState, action) => {
       } else {
         newState = [...state, action.payload.index];
       }
+      localStorage.setItem("selected", JSON.stringify(newState));
+      return newState;
+    }
+    case FETCH_DATA: {
+      const newState = [];
       localStorage.setItem("selected", JSON.stringify(newState));
       return newState;
     }

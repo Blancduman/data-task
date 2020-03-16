@@ -8,8 +8,7 @@ import {
   FETCH_FILTER,
   VIRTULIZED,
   SELECT,
-  HIDE,
-  HIDE_FIELDS
+  HIDE
 } from "./types";
 faker.seed(783);
 

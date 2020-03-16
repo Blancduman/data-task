@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FixedSizeList } from "react-window";
 import { loadData } from "../actions/index";
 import { Row } from "./Row";
 import TableHead from "./TableHead";
 import FilterBottom from "./FilterBottom";
-import HideFields from "./HideFields";
+import ButtonsSelected from "./ButtonsSelected";
 
 import "./App.css";
 
@@ -15,6 +15,8 @@ function App(props) {
   const data = useSelector(state => state.data.showData);
   const isLoaded = useSelector(state => state.data.data).length !== 0;
   const virtual = useSelector(state => state.virtulized);
+  const hide = useSelector(state => state.hide);
+  const [width, setWidth] = useState();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -22,6 +24,17 @@ function App(props) {
     // dispatch(filtify());
     // dispatch(toggleSort());
   }, [isLoaded, dispatch]);
+
+  useEffect(() => {
+    let newWidth = 0;
+    for (let h of hide) {
+      if (h.status) {
+        newWidth += h.width;
+      }
+    }
+    console.log(newWidth);
+    setWidth(newWidth);
+  }, [hide]);
 
   // useEffect(() => {
   //   console.log(data);
@@ -33,10 +46,10 @@ function App(props) {
         <FilterBottom />
         <TableHead />
         <FixedSizeList
-          height={data.length > 15 ? 700 : data.length * 45 + 1}
+          height={data.length > 13 ? 600 : data.length * 45 + 1}
           itemCount={data.length}
           itemSize={45}
-          width={1369}
+          width={width}
           style={{
             overflowX: "hidden",
             borderBottom: "1px solid #ddd",
@@ -45,7 +58,7 @@ function App(props) {
         >
           {Row}
         </FixedSizeList>
-        <HideFields />
+        <ButtonsSelected />
       </div>
     );
 
@@ -54,7 +67,7 @@ function App(props) {
       <FilterBottom />
       <TableHead />
       <Dasasd data={data} />
-      <HideFields />
+      <ButtonsSelected />
     </div>
   );
 }
@@ -63,6 +76,15 @@ export default App;
 
 const Dasasd = () => {
   const data = useSelector(state => state.data.showData);
+  const hide = useSelector(state => state.hide);
+  const [width, setWidth] = useState();
+  useEffect(() => {
+    let newWidth = 0;
+    for (let h of hide) {
+      newWidth += h.width;
+    }
+    setWidth(newWidth);
+  }, [hide]);
   let counter = 0;
   const as = data.map((i, index) => {
     return <Row key={counter++} index={index} style={{ height: 44 }} />;
@@ -74,8 +96,8 @@ const Dasasd = () => {
         overflowX: "hidden",
         borderBottom: "1px solid #ddd",
         overflowY: "scroll",
-        height: 700,
-        width: 1369
+        height: data.length > 13 ? 600 : data.length * 45 + 1,
+        width: width
       }}
     >
       {as}
