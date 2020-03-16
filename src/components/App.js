@@ -12,13 +12,14 @@ import "./App.css";
 
 function App(props) {
   const data = useSelector(state => state.data.showData);
+  const isLoaded = useSelector(state => state.data.data) === [];
   const virtual = useSelector(state => state.virtulized);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(loadData());
-    dispatch(filtify());
-    dispatch(toggleSort());
+    if (isLoaded) dispatch(loadData());
+    // dispatch(filtify());
+    // dispatch(toggleSort());
   }, []);
 
   // useEffect(() => {
