@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { loadData, exportCSV, deleteSelected } from "../actions";
+import {
+  loadData,
+  exportCSV,
+  deleteSelected,
+  toggleSort,
+  filtify
+} from "../actions";
 
 import "./ButtonsSelected.scss";
 
@@ -56,7 +62,11 @@ const ButtonsSelected = () => {
           <svg
             className="svg-icon"
             viewBox="0 0 20 20"
-            onClick={() => dispatch(loadData())}
+            onClick={() => {
+              dispatch(loadData());
+              dispatch(toggleSort());
+              dispatch(filtify());
+            }}
           >
             <path
               fill="none"

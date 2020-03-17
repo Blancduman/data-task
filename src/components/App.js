@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FixedSizeList } from "react-window";
-import { loadData } from "../actions/index";
+import { loadData, toggleSort, filtify } from "../actions/index";
 import { Row } from "./Row";
 import TableHead from "./TableHead";
 import FilterBottom from "./FilterBottom";
@@ -20,7 +20,11 @@ function App(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!isLoaded) dispatch(loadData());
+    if (!isLoaded) {
+      dispatch(loadData());
+      dispatch(toggleSort());
+      dispatch(filtify());
+    }
   }, [isLoaded, dispatch]);
 
   useEffect(() => {
