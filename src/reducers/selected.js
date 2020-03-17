@@ -16,7 +16,13 @@ export default (state = initialState, action) => {
       return newState;
     }
     case SELECT_SOLO: {
-      const newState = [action.payload.index];
+      const index = state.findIndex(i => i === action.payload.index);
+      const newState =
+        index === -1
+          ? [action.payload.index]
+          : state.length > 0
+          ? [action.payload.index]
+          : [];
       localStorage.setItem("selected", JSON.stringify(newState));
       return newState;
     }
