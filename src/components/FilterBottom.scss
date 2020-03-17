@@ -1,8 +1,6 @@
 @import "styles/constants";
 
 .filter-bottom {
-  // font-size: 1.2rem;
-  // display: flex;
   width: 1537px;
 }
 
@@ -20,78 +18,46 @@
 }
 
 .filter-bottom--rank {
-  // min-width: calc(#{$rank-width} - 4px);
-  // width: calc(#{$rank-width} - 3px);
   min-width: $rank-width;
   max-width: $rank-width;
-  // min-width: calc(#{$rank-width} - 1px);
-  // max-width: calc(#{$rank-width} - 1px);
-  // width: calc(#{$rank-width} - 1px);
 }
 .filter-bottom--fullname {
-  // min-width: $fullname-width;
-  // min-width: calc(#{$fullname-width} + 4px);
   min-width: calc(#{$fullname-width} + 9px);
   max-width: calc(#{$fullname-width} + 9px);
-  // width: calc(#{$fullname-width} - 1px);
 }
 .filter-bottom--email {
-  // min-width: $email-width;
-  // min-width: calc(#{$email-width} + 2px);
   min-width: calc(#{$email-width} + 9px);
   max-width: calc(#{$email-width} + 9px);
-  // width: calc(#{$email-width} - 1px);
   justify-content: flex-start;
 }
 .filter-bottom--LocationName {
-  // min-width: $LocationName-width;
-  // min-width: calc(#{$LocationName-width} + 4px);
   min-width: calc(#{$LocationName-width} + 10px);
   max-width: calc(#{$LocationName-width} + 10px);
   border-left-width: 0 !important;
-  // width: calc(#{$LocationName-width} - 1px);
 }
 .filter-bottom--role {
-  // min-width: calc(#{$role-width} + 48px);
   min-width: calc(#{$role-width} + 1px);
   max-width: calc(#{$role-width} + 1px);
   display: inline-block;
   font-size: 15px;
-  // width: calc(#{$currency-width} - 1px);
 }
 .filter-bottom--phone {
-  // width: calc(#{$phone-width} - 5px);
   min-width: $phone-width;
   border-left-width: 0 !important;
   max-width: $phone-width;
-  // min-width: calc(#{$phone-width} + 1px);
-  // max-width: calc(#{$phone-width} + 1px);
-  // width: calc(#{$phone-width} - 1px);
 }
 .filter-bottom--date {
-  // min-width: $date-width;
-  // width: calc(#{$date-width} - 5px);
   font-size: 12px;
   padding-top: 3px;
-  // min-width: calc(#{$date-width} - 3px);
   min-width: calc(#{$date-width} - 2px);
   max-width: calc(#{$date-width} - 2px);
-  // width: calc(#{$date-width} - 1px);
 }
 .filter-bottom--payment {
   min-width: calc(#{$payment-width} + 10px);
   max-width: calc(#{$payment-width} + 10px);
-  // border-right-width: 0px;
   border-left-width: 0px;
-  // min-width: calc(#{$payment-width} + 7px);
-  // max-width: calc(#{$payment-width} + 17px);
-  // width: calc(#{$payment-width} - 1px);
 }
 .filter-bottom--activity {
-  // text-align: center;
-  // vertical-align: middle;
-  // min-width: calc(#{$active-width} - 1px);
-  // max-width: calc(#{$active-width} - 1px);
   min-width: $active-width;
   max-width: $active-width;
   border-left-width: 0 !important;
@@ -101,19 +67,6 @@
   padding-bottom: 9px;
   border: 1px solid #ddd;
   border-bottom-width: 0px;
-
-  // textAlign: "center",
-  //         verticalAlign: "middle",
-  //         padding: "0 54px",
-  //         border: "1px solid #ddd",
-  //         borderBottomWidth: 0
-  // margin: 0;
-  // display: inline-flex;
-  // top: 12px;
-  // position: relative;
-  // padding-left: 31px;
-  // padding-top: 3px;
-  // border: 1px solid #ddd;
 }
 
 ul.breadcrumb {
@@ -131,10 +84,6 @@ ul.breadcrumb li + li:before {
   padding: 8px;
   color: black;
   content: ">";
-}
-
-.multiselect {
-  // width: 200px;
 }
 
 .selectBox {
