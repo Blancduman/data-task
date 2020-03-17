@@ -21,8 +21,6 @@ function App(props) {
 
   useEffect(() => {
     if (!isLoaded) dispatch(loadData());
-    // dispatch(filtify());
-    // dispatch(toggleSort());
   }, [isLoaded, dispatch]);
 
   useEffect(() => {
@@ -32,13 +30,8 @@ function App(props) {
         newWidth += h.width;
       }
     }
-    console.log(newWidth);
     setWidth(newWidth);
   }, [hide]);
-
-  // useEffect(() => {
-  //   console.log(data);
-  // }, [data]);
 
   if (virtual)
     return (
@@ -81,7 +74,9 @@ const Dasasd = () => {
   useEffect(() => {
     let newWidth = 0;
     for (let h of hide) {
-      newWidth += h.width;
+      if (h.status) {
+        newWidth += h.width;
+      }
     }
     setWidth(newWidth);
   }, [hide]);

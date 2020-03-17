@@ -1,11 +1,10 @@
 import { FILTER } from "../actions/types";
 
-// const initialState = [];
 const initialState = JSON.parse(localStorage.getItem("filter")) || [];
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case FILTER:
+    case FILTER: {
       const index = state.findIndex(i => i.key === action.payload.key);
 
       if (index !== -1) {
@@ -37,6 +36,7 @@ export default (state = initialState, action) => {
       ];
       localStorage.setItem("filter", JSON.stringify(newState));
       return newState;
+    }
     default:
       return state;
   }

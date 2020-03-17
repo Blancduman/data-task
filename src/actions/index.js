@@ -9,7 +9,9 @@ import {
   VIRTULIZED,
   SELECT,
   HIDE,
-  DELETE
+  DELETE,
+  TOGGLE_SORT_SOLO,
+  SELECT_SOLO
 } from "./types";
 faker.seed(783);
 
@@ -42,9 +44,16 @@ export const loadData = () => async dispatch => {
   dispatch({ type: FETCH_DATA, payload: data });
 };
 
-export const toggleSort = (key = "do") => async (dispatch, getState) => {
+export const toggleSort = (key = "do", solo = false) => async (
+  dispatch,
+  getState
+) => {
   if (key !== "do") {
-    dispatch({ type: TOGGLE_SORT, payload: { key } });
+    if (solo) {
+      dispatch({ type: TOGGLE_SORT, payload: { key } });
+    } else {
+      dispatch({ type: TOGGLE_SORT_SOLO, payload: { key } });
+    }
   }
   const headers = getState().tableHeaders;
 
@@ -68,7 +77,6 @@ export const toggleSort = (key = "do") => async (dispatch, getState) => {
     ? getState().data.filteredData
     : getState().data.data;
   const sortedData = _.orderBy(unSortedData, [...keys], [...values]);
-  // console.log([...keys], [...values]);
   dispatch({ type: SORT_DATA, payload: sortedData });
 };
 
@@ -148,8 +156,12 @@ export const virtulized = () => async dispatch => {
   dispatch({ type: VIRTULIZED });
 };
 
-export const selecting = index => async dispatch => {
-  dispatch({ type: SELECT, payload: { index: index } });
+export const selecting = (index, shift) => async dispatch => {
+  if (shift) {
+    dispatch({ type: SELECT, payload: { index: index } });
+  } else {
+    dispatch({ type: SELECT_SOLO, payload: { index: index } });
+  }
 };
 
 export const hide = key => async dispatch => {
@@ -159,7 +171,7 @@ export const deleteSelected = () => (dispatch, getState) => {
   dispatch({ type: DELETE, payload: getState().selected });
 };
 
-export const exportCSV = () => (dispatch, getState) => {
+export const exportCSV = (selectedOnly = false) => (dispatch, getState) => {
   const headers = getState().hide.reduce((result, i) => {
     if (i.key === "id") {
       return { ...result, [i.key]: "id" };
@@ -190,14 +202,26 @@ export const exportCSV = () => (dispatch, getState) => {
     }
     return result;
   }, {});
-
-  const data = getState()
-    .data.showData.slice()
-    .map(i => {
-      i.payment = `${i.payment.currency} ${i.payment.amount}`;
-      i.date = new Date(i.date).toLocaleDateString(navigator.language);
-      return _.pick(i, _.keys(headers));
+  let data;
+  if (selectedOnly) {
+    const filters = getState().selected;
+    data = getState().data.showData.reduce((result, i) => {
+      if (filters.indexOf(i.id) !== -1) {
+        const tmp = { ...i };
+        tmp.payment = `${tmp.payment.currency} ${tmp.payment.amount}`;
+        tmp.date = new Date(tmp.date).toLocaleDateString(navigator.language);
+        return [...result, _.pick(tmp, _.keys(headers))];
+      }
+      return result;
+    }, []);
+  } else {
+    data = getState().data.showData.map(i => {
+      const tmp = { ...i };
+      tmp.payment = `${tmp.payment.currency} ${tmp.payment.amount}`;
+      tmp.date = new Date(tmp.date).toLocaleDateString(navigator.language);
+      return _.pick(tmp, _.keys(headers));
     });
+  }
 
   data.unshift(headers);
 
@@ -225,7 +249,7 @@ function convertToCSV(objArray) {
   for (var i = 0; i < array.length; i++) {
     var line = "";
     for (var index in array[i]) {
-      if (line != "") line += ",";
+      if (line !== "") line += ",";
 
       line += array[i][index];
     }

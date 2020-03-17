@@ -42,8 +42,8 @@ export const Row = ({ index, style }) => {
   //   });
   // }, [tableHeaders]);
 
-  const handleSelect = _index => {
-    dispatch(selecting(_index));
+  const handleSelect = (_index, shift) => {
+    dispatch(selecting(_index, shift));
   };
 
   return (
@@ -53,7 +53,12 @@ export const Row = ({ index, style }) => {
       className={`tableRow${
         selected.findIndex(i => i === id) !== -1 ? " selected" : ""
       }`}
-      onClick={() => handleSelect(id)}
+      onClick={e => {
+        if (e.shiftKey) {
+          e.preventDefault();
+        }
+        handleSelect(id, e.shiftKey);
+      }}
     >
       {notHide[0].status && (
         <span className="tableRow--rank display-cell-flex text-verflow-ellipsis border-right border-left">

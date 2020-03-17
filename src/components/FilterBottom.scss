@@ -22,8 +22,10 @@
 .filter-bottom--rank {
   // min-width: calc(#{$rank-width} - 4px);
   // width: calc(#{$rank-width} - 3px);
-  min-width: calc(#{$rank-width} - 1px);
-  max-width: calc(#{$rank-width} - 1px);
+  min-width: $rank-width;
+  max-width: $rank-width;
+  // min-width: calc(#{$rank-width} - 1px);
+  // max-width: calc(#{$rank-width} - 1px);
   // width: calc(#{$rank-width} - 1px);
 }
 .filter-bottom--fullname {
@@ -44,8 +46,9 @@
 .filter-bottom--LocationName {
   // min-width: $LocationName-width;
   // min-width: calc(#{$LocationName-width} + 4px);
-  min-width: calc(#{$LocationName-width} + 9px);
-  max-width: calc(#{$LocationName-width} + 9px);
+  min-width: calc(#{$LocationName-width} + 10px);
+  max-width: calc(#{$LocationName-width} + 10px);
+  border-left-width: 0 !important;
   // width: calc(#{$LocationName-width} - 1px);
 }
 .filter-bottom--role {
@@ -58,9 +61,11 @@
 }
 .filter-bottom--phone {
   // width: calc(#{$phone-width} - 5px);
-  // min-width: $phone-width;
-  min-width: calc(#{$phone-width} - 1px);
-  max-width: calc(#{$phone-width} - 1px);
+  min-width: $phone-width;
+  border-left-width: 0 !important;
+  max-width: $phone-width;
+  // min-width: calc(#{$phone-width} + 1px);
+  // max-width: calc(#{$phone-width} + 1px);
   // width: calc(#{$phone-width} - 1px);
 }
 .filter-bottom--date {
@@ -76,6 +81,8 @@
 .filter-bottom--payment {
   min-width: calc(#{$payment-width} + 10px);
   max-width: calc(#{$payment-width} + 10px);
+  // border-right-width: 0px;
+  border-left-width: 0px;
   // min-width: calc(#{$payment-width} + 7px);
   // max-width: calc(#{$payment-width} + 17px);
   // width: calc(#{$payment-width} - 1px);
@@ -83,8 +90,11 @@
 .filter-bottom--activity {
   // text-align: center;
   // vertical-align: middle;
-  min-width: calc(#{$active-width} + 9px);
-  max-width: calc(#{$active-width} + 9px);
+  // min-width: calc(#{$active-width} - 1px);
+  // max-width: calc(#{$active-width} - 1px);
+  min-width: $active-width;
+  max-width: $active-width;
+  border-left-width: 0 !important;
   display: inline-block;
   text-align: center;
   padding-top: 7px;
@@ -120,7 +130,7 @@ ul.breadcrumb li {
 ul.breadcrumb li + li:before {
   padding: 8px;
   color: black;
-  content: "/\00a0";
+  content: ">";
 }
 
 .multiselect {

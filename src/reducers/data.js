@@ -30,10 +30,10 @@ export default (state = initialState, action) => {
     }
     case DELETE: {
       const newShowData = state.showData.filter(
-        i => action.payload.findIndex(i.id) === -1
+        ({ id }) => action.payload.indexOf(id) === -1
       );
       const newData = state.data.filter(
-        i => action.payload.findIndex(i.id) === -1
+        ({ id }) => action.payload.indexOf(id) === -1
       );
       const newState = {
         ...state,

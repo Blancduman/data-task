@@ -23,8 +23,8 @@ const TableHead = () => {
   const notHide = useSelector(state => state.hide);
   const [headers, setHeaders] = useState({});
 
-  const toggleClick = key => {
-    dispatch(toggleSort(key));
+  const toggleClick = (key, shift = false) => {
+    dispatch(toggleSort(key, shift));
   };
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const TableHead = () => {
           className={`tableHead--rank border-left display-cell-flex border-right sort-by${
             headers["rank"] ? headers["rank"] + " sorted" : ""
           }`}
-          onClick={() => toggleClick("rank")}
+          onClick={e => toggleClick("rank", e.shiftKey)}
         >
           #
         </span>
@@ -55,7 +55,7 @@ const TableHead = () => {
           className={`tableHead--fullname display-cell-flex border-right sort-by${
             headers["fullName"] ? headers["fullName"] + " sorted" : ""
           }`}
-          onClick={() => toggleClick("fullName")}
+          onClick={e => toggleClick("fullName", e.shiftKey)}
         >
           Fullname
         </span>
@@ -65,7 +65,7 @@ const TableHead = () => {
           className={`tableHead--email display-cell-flex border-right sort-by${
             headers["email"] ? headers["email"] + " sorted" : ""
           }`}
-          onClick={() => toggleClick("email")}
+          onClick={e => toggleClick("email", e.shiftKey)}
         >
           Email
         </span>
@@ -75,7 +75,7 @@ const TableHead = () => {
           className={`tableHead--LocationName display-cell-flex border-right  sort-by${
             headers["LocationName"] ? headers["LocationName"] + " sorted" : ""
           }`}
-          onClick={() => toggleClick("LocationName")}
+          onClick={e => toggleClick("LocationName", e.shiftKey)}
         >
           Location
         </span>
@@ -85,7 +85,7 @@ const TableHead = () => {
           className={`tableHead--role display-cell-flex border-right sort-by${
             headers["role"] ? headers["role"] + " sorted" : ""
           }`}
-          onClick={() => toggleClick("role")}
+          onClick={e => toggleClick("role", e.shiftKey)}
         >
           Role
         </span>
@@ -100,7 +100,7 @@ const TableHead = () => {
           className={`tableHead--date display-cell-flex border-right sort-by${
             headers["date"] ? headers["date"] + " sorted" : ""
           }`}
-          onClick={() => toggleClick("date")}
+          onClick={e => toggleClick("date", e.shiftKey)}
         >
           Date
         </span>
@@ -110,7 +110,7 @@ const TableHead = () => {
           className={`tableHead--payment display-cell-flex border-right sort-by${
             headers["payment"] ? headers["payment"] + " sorted" : ""
           }`}
-          onClick={() => toggleClick("payment")}
+          onClick={e => toggleClick("payment", e.shiftKey)}
         >
           Payment
         </span>
@@ -120,7 +120,7 @@ const TableHead = () => {
           className={`tableHead--activity display-cell-flex border-right sort-by${
             headers["isActive"] ? headers["isActive"] + " sorted" : ""
           }`}
-          onClick={() => toggleClick("isActive")}
+          onClick={e => toggleClick("isActive", e.shiftKey)}
         >
           Activity
         </span>

@@ -4,6 +4,7 @@
   font-size: 1.6rem;
   display: flex;
   width: 1537px;
+  user-select: none;
 }
 
 .sticky {
@@ -17,7 +18,7 @@
 }
 
 .sorted {
-  background-color: #fff2f2;
+  background-color: #5df38b4f;
 }
 .border-right {
   border-right: 1px solid #ddd;
@@ -99,7 +100,8 @@
 }
 .tableHead--activity {
   // min-width: $payment-width;
-  min-width: calc(#{$active-width} + 10px);
+  // min-width: calc(#{$active-width} + 10px);
+  min-width: $active-width;
   max-width: $active-width;
   // width: calc(#{$payment-width} - 1px);
   justify-content: center;

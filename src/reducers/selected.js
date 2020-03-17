@@ -1,4 +1,4 @@
-import { SELECT, FETCH_DATA } from "../actions/types";
+import { SELECT, FETCH_DATA, DELETE, SELECT_SOLO } from "../actions/types";
 
 const initialState = JSON.parse(localStorage.getItem("selected")) || [];
 
@@ -12,6 +12,16 @@ export default (state = initialState, action) => {
       } else {
         newState = [...state, action.payload.index];
       }
+      localStorage.setItem("selected", JSON.stringify(newState));
+      return newState;
+    }
+    case SELECT_SOLO: {
+      const newState = [action.payload.index];
+      localStorage.setItem("selected", JSON.stringify(newState));
+      return newState;
+    }
+    case DELETE: {
+      const newState = [];
       localStorage.setItem("selected", JSON.stringify(newState));
       return newState;
     }

@@ -8,8 +8,8 @@ const defaultState = [
   { key: "role", status: true, width: 101 },
   { key: "phone", status: true, width: 151 },
   { key: "date", status: true, width: 131 },
-  { key: "payment", status: true, width: 141 },
-  { key: "isActive", status: true, width: 110 },
+  { key: "payment", status: true, width: 131 },
+  { key: "isActive", status: true, width: 111 },
   { key: "id", status: false }
 ];
 

@@ -36,7 +36,6 @@ const FilterBottom = () => {
         newWidth += h.width;
       }
     }
-    console.log(newWidth);
     setWidth(newWidth);
   }, [hide]);
 
@@ -51,7 +50,6 @@ const FilterBottom = () => {
     let tmpFilters = {};
     for (let tmp of _filter) {
       tmpFilters[tmp.key] = tmp.filter;
-      console.log(tmp.key === "role" ? tmp.filter : "");
     }
     setFilters({
       ...tmpFilters
@@ -62,7 +60,10 @@ const FilterBottom = () => {
     const crum = beadcrum.map(i => <li key={i.key}>{i.key}</li>);
 
     return (
-      <ul className="breadcrumb" style={{ width: width - 33 }}>
+      <ul
+        className="breadcrumb text-verflow-ellipsis"
+        style={{ width: width - 33 }}
+      >
         <li>Order fileds queue</li>
         {crum}
       </ul>
