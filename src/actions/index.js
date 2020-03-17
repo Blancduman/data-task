@@ -109,12 +109,12 @@ export const filtify = (key = "do", filter) => async (dispatch, getState) => {
     });
     dispatch({
       type: FETCH_FILTER,
-      payload: { status: true, filteredData: filteredData }
+      payload: { filteredData: filteredData }
     });
   } else {
     dispatch({
       type: FETCH_FILTER,
-      payload: { status: false, filteredData: [] }
+      payload: { filteredData: unFilteredData }
     });
   }
 };

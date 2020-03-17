@@ -1,4 +1,10 @@
-import { SELECT, FETCH_DATA, DELETE, SELECT_SOLO } from "../actions/types";
+import {
+  SELECT,
+  FETCH_DATA,
+  DELETE,
+  SELECT_SOLO,
+  FETCH_FILTER
+} from "../actions/types";
 
 const initialState = JSON.parse(localStorage.getItem("selected")) || [];
 
@@ -33,6 +39,17 @@ export default (state = initialState, action) => {
     }
     case FETCH_DATA: {
       const newState = [];
+      localStorage.setItem("selected", JSON.stringify(newState));
+      return newState;
+    }
+    case FETCH_FILTER: {
+      const newState = action.payload.filteredData.reduce((result, i) => {
+        const index = state.findIndex(j => j === i.id);
+        if (index !== -1) {
+          return [...result, i];
+        }
+        return result;
+      }, []);
       localStorage.setItem("selected", JSON.stringify(newState));
       return newState;
     }

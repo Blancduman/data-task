@@ -2,9 +2,7 @@ import { FETCH_DATA, SORT_DATA, FETCH_FILTER, DELETE } from "../actions/types";
 
 const initialState = JSON.parse(localStorage.getItem("data")) || {
   data: [],
-  showData: [],
-  isFiltered: false,
-  filteredData: []
+  showData: []
 };
 
 export default (state = initialState, action) => {
@@ -22,8 +20,7 @@ export default (state = initialState, action) => {
     case FETCH_FILTER: {
       const newState = {
         ...state,
-        isFiltered: action.payload.status,
-        filteredData: action.payload.filteredData
+        showData: action.payload.filteredData
       };
       localStorage.setItem("data", JSON.stringify(newState));
       return newState;

@@ -21,8 +21,8 @@ const FilterBottom = () => {
   const [width, setWidth] = useState(1337);
 
   const handleFilter = (key, value) => {
-    dispatch(filtify(key, value));
     dispatch(toggleSort());
+    dispatch(filtify(key, value));
     // setFilters({
     //   ...filters,
     //   [key]: value
